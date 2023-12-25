@@ -159,11 +159,13 @@ namespace cg_lab89.Render
             }
         }
 
-        public static void DrawSceneZbuffer(int w, int h, ref List<Polyhedron> polyhedrons, ref Camera camera, ref FastBitmap fb)
+        public static void DrawSceneZbuffer(int w, int h, ref List<Polyhedron> polyhedrons, ref Camera camera, ref FastBitmap fb, Light l)
         {
             //Z_buffer.z_buf(w,h, polyhedrons, ref camera, ref fb);
-            Texturing.z_buf(w, h, polyhedrons, ref camera, ref fb,new Light(new Dot(50, 50, 50)), true); 
-            PointF? p1 = camera.getProjection(new Dot(250,250,250));
+            bool flag = true;
+            Texturing.z_buf(w, h, polyhedrons, ref camera, ref fb, ref l, flag);
+            flag = false;
+            PointF? p1 = camera.getProjection(l.Position);
             if (p1.HasValue) fb.SetPixel(new Point((int)p1.Value.X, (int)p1.Value.Y), Color.Blue);
         }
 

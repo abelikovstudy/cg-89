@@ -22,7 +22,7 @@ namespace cg_lab89.Primitives
         public Texel tex;
         public float lightness;
         public VectorUtils norm;
-        public Dot(float _x, float _y, float _z, FigureType ft = FigureType.Tetrahedron, float _lightness = 0.5f)
+        public Dot(float _x, float _y, float _z, FigureType ft = FigureType.Tetrahedron, float _lightness = 1f)
         {
             x = _x;
             y = _y;

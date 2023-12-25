@@ -17,6 +17,7 @@ namespace cg_lab89
         public Camera camera;
         List<Polyhedron> polyhedrons;
         Polyhedron selected;
+        Light light = new Light(new Dot(105, 0, 105));
         public Form1()
         {
             InitializeComponent();
@@ -66,7 +67,7 @@ namespace cg_lab89
             }
             else if (radioRenderZbuffer.Checked)
             {
-                Drawing.DrawSceneZbuffer(pictureBox1.Width, pictureBox1.Height, ref polyhedrons, ref camera, ref fb);
+                Drawing.DrawSceneZbuffer(pictureBox1.Width, pictureBox1.Height, ref polyhedrons, ref camera, ref fb, light);
             }
             pictureBox1.Image = pictureBitmap;
             fb.Dispose();
@@ -106,8 +107,32 @@ namespace cg_lab89
                 case Keys.J:
                     camera.rotate(new VectorUtils(-0.05, 0, 0));
                     break;
-            }
+                case Keys.Z:
+                    light.move(0,0,10);
+                    break;
 
+                case Keys.X:
+                    light.move(0, 0, -10);
+                    break;
+
+                case Keys.C:
+
+                    light.move(0, 10, 0);
+                    break;
+
+                case Keys.V:
+                    light.move(0, -10, 0);
+                    break;
+
+                case Keys.B:
+                    light.move(10, 0, 0);
+                    break;
+
+                case Keys.N:
+                    light.move(-10, 0, 0);
+                    break;
+            }
+            Debug.WriteLine(light.Position);
             pictureBox1.Update();
         }
 
