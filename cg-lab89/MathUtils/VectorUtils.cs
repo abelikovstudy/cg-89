@@ -57,6 +57,11 @@ namespace cg_lab89.MathUtils
         {
             return new VectorUtils(k * b.x, k * b.y, k * b.z);
         }
+        public override string ToString()
+        {
+
+            return string.Concat($"{x} {y} {z}");
+        }
     }
 }
 

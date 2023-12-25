@@ -16,6 +16,7 @@ namespace cg_lab89.Render
         public VectorUtils direction;
         public VectorUtils verticalOffset;
         public VectorUtils horisontalOffset;
+        public MatrixUtils test;
         const double cameraRotationSpeed = 0.1;
         private double yaw = 0.0, pitch = 0.0;
         public float fov { get; set; }
@@ -39,7 +40,7 @@ namespace cg_lab89.Render
                               0, 0, near * far * rangeInv * 2, 0
             );
 
-            position = new Dot(-10, 0, 0);
+            position = new Dot(0, 0, 0);
             direction = new VectorUtils(1, 0, 0);
             verticalOffset = new VectorUtils(0, 0, 1);
             horisontalOffset = (direction * verticalOffset).normalize();
@@ -103,10 +104,12 @@ namespace cg_lab89.Render
             {
                 return null;
             }
+            test = res;
             res.matrix[0, 0] /= (float)res.matrix[3, 0];
             res.matrix[1, 0] /= (float)res.matrix[3, 0];
             res.matrix[0, 0] = Math.Clamp(res.matrix[0, 0], -1, 1);
             res.matrix[1, 0] = Math.Clamp(res.matrix[1, 0], -1, 1);
+
             return new PointF(Constants.WORLD_X + (float)(res.matrix[0, 0]) * Constants.WORLD_X, Constants.WORLD_Y + (float)(res.matrix[1, 0]) * Constants.WORLD_X);
         }
     }

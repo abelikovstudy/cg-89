@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using cg_lab89.Primitives;
 namespace cg_lab89.Render
 {
-    using System.Diagnostics;
-    using System.Drawing.Drawing2D;
 
     public static class Z_buffer
     {
@@ -35,46 +33,50 @@ namespace cg_lab89.Render
             // "рабочие точки"
             // изначально они находятся в верхней точке
             var wpoints = points.Select((p) => (x: (int)p.x, y: (int)p.y, z: (int)p.z)).ToList();
-            var xy01 = interpolate(wpoints[0].y, wpoints[0].x, wpoints[1].y, wpoints[1].x);
-            var xy12 = interpolate(wpoints[1].y, wpoints[1].x, wpoints[2].y, wpoints[2].x);
-            var xy02 = interpolate(wpoints[0].y, wpoints[0].x, wpoints[2].y, wpoints[2].x);
-            var yz01 = interpolate(wpoints[0].y, wpoints[0].z, wpoints[1].y, wpoints[1].z);
-            var yz12 = interpolate(wpoints[1].y, wpoints[1].z, wpoints[2].y, wpoints[2].z);
-            var yz02 = interpolate(wpoints[0].y, wpoints[0].z, wpoints[2].y, wpoints[2].z);
-            xy01.RemoveAt(xy01.Count() - 1);//убрать точку, чтобы не было повтора
-            var xy = xy01.Concat(xy12).ToList();
-            yz01.RemoveAt(yz01.Count() - 1);
-            var yz = yz01.Concat(yz12).ToList();
-            //когда растеризуем, треугольник делим надвое
-            //ищем координаты, чтобы разделить треугольник на 2
-            int center = xy.Count() / 2;
-            List<int> lx, rx, lz, rz;//для приращений
-            if (xy02[center] < xy[center])
+            if (wpoints.Count > 2) 
             {
-                lx = xy02;
-                lz = yz02;
-                rx = xy;
-                rz = yz;
-            }
-            else
-            {
-                lx = xy;
-                lz = yz;
-                rx = xy02;
-                rz = yz02;
-            }
-            int y0 = wpoints[0].y;
-            int y2 = wpoints[2].y;
-            for (int i = 0; i <= y2 - y0; i++)
-            {
-                int leftx = lx[i];
-                int rightx = rx[i];
-                List<int> zcurr = interpolate(leftx, lz[i], rightx, rz[i]);
-                for (int j = leftx; j < rightx; j++)
+                var xy01 = interpolate(wpoints[0].y, wpoints[0].x, wpoints[1].y, wpoints[1].x);
+                var xy12 = interpolate(wpoints[1].y, wpoints[1].x, wpoints[2].y, wpoints[2].x);
+                var xy02 = interpolate(wpoints[0].y, wpoints[0].x, wpoints[2].y, wpoints[2].x);
+                var yz01 = interpolate(wpoints[0].y, wpoints[0].z, wpoints[1].y, wpoints[1].z);
+                var yz12 = interpolate(wpoints[1].y, wpoints[1].z, wpoints[2].y, wpoints[2].z);
+                var yz02 = interpolate(wpoints[0].y, wpoints[0].z, wpoints[2].y, wpoints[2].z);
+                xy01.RemoveAt(xy01.Count() - 1);//убрать точку, чтобы не было повтора
+                var xy = xy01.Concat(xy12).ToList();
+                yz01.RemoveAt(yz01.Count() - 1);
+                var yz = yz01.Concat(yz12).ToList();
+                //когда растеризуем, треугольник делим надвое
+                //ищем координаты, чтобы разделить треугольник на 2
+                int center = xy.Count() / 2;
+                List<int> lx, rx, lz, rz;//для приращений
+                if (xy02[center] < xy[center])
                 {
-                    res.Add(new Dot(j, y0 + i, zcurr[j - leftx]));
+                    lx = xy02;
+                    lz = yz02;
+                    rx = xy;
+                    rz = yz;
+                }
+                else
+                {
+                    lx = xy;
+                    lz = yz;
+                    rx = xy02;
+                    rz = yz02;
+                }
+                int y0 = wpoints[0].y;
+                int y2 = wpoints[2].y;
+                for (int i = 0; i <= y2 - y0; i++)
+                {
+                    int leftx = lx[i];
+                    int rightx = rx[i];
+                    List<int> zcurr = interpolate(leftx, lz[i], rightx, rz[i]);
+                    for (int j = leftx; j < rightx; j++)
+                    {
+                        res.Add(new Dot(j, y0 + i, zcurr[j - leftx]));
+                    }
                 }
             }
+
             return res;
         }
         public static List<List<Dot>> Triangulate(List<Dot> points)
@@ -122,8 +124,6 @@ namespace cg_lab89.Render
                 var current = camera.getProjection(p);
                 if (current.HasValue)
                 {
-                    // Point newpoint = new Point(current.Item1.Value.X, current.Item1.Value.Y,current.Item2);
-                    //var current = transformPoint(p, matrix);
                     var tocamv = camera.toCameraView(p);
                     Dot newpoint = new Dot(current.Value.X, current.Value.Y, tocamv.z);
                     res.Add(newpoint);
@@ -180,9 +180,12 @@ namespace cg_lab89.Render
                         {
                             if (p.z < zbuffer[x, y])
                             {
-                                Debug.WriteLine($"{x}{y}{p.z}");
-                                zbuffer[x, y] = p.z;
-                                fb.SetPixel(new Point(x, y), colors[index % colors.Count()]);//fb.Height - 
+                                PointF? p1 = camera.getProjection(new Dot(p.x,p.y,p.z));
+                                if (p1.HasValue) 
+                                {
+                                    zbuffer[x, y] = p.z;
+                                    fb.SetPixel(new Point(x, y), colors[index % colors.Count()]);//fb.Height - 
+                                }
                             }
 
                         }

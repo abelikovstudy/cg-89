@@ -125,6 +125,7 @@ namespace cg_lab89.Figures
         }
         public static List<Polygon> getPolys(List<Dot> dots)
         {
+
             Dot d0 = dots[0];
             Dot d1 = dots[1];
             Dot d2 = dots[2];
@@ -146,16 +147,16 @@ namespace cg_lab89.Figures
             Dot d18 = dots[18];
             Dot d19 = dots[19];
 
-            Edge e1 = new Edge(d8, d10); // 8 10
-            Edge e2 = new Edge(d8, d0); // 8 0
-            Edge e3 = new Edge(d8, d4); // 8 4
-            Edge e4 = new Edge(d10, d2); // 10 2
-            Edge e5 = new Edge(d10, d6); // 10 6
-            Edge e6 = new Edge(d9, d11); // 9 11
-            Edge e7 = new Edge(d9, d1); // 9 1
-            Edge e8 = new Edge(d9, d5); // 9 5
-            Edge e9 = new Edge(d11, d3); // 11 3
-            Edge e10 = new Edge(d11, d7); // 11 7
+            Edge e1 = new Edge(d10, d8); // 8 10
+            Edge e2 = new Edge(d0, d8); // 8 0
+            Edge e3 = new Edge(d4, d8); // 8 4
+            Edge e4 = new Edge(d2, d10); // 10 2
+            Edge e5 = new Edge(d6, d10); // 10 6
+            Edge e6 = new Edge(d11, d9); // 9 11
+            Edge e7 = new Edge(d1, d9); // 9 1
+            Edge e8 = new Edge(d5, d9); // 9 5
+            Edge e9 = new Edge(d3, d11); // 11 3
+            Edge e10 = new Edge(d7, d11); // 11 7
             /*
             {12,14},
             {13,15},
@@ -168,16 +169,16 @@ namespace cg_lab89.Figures
             {15,6},
             {15,7},
             */
-            Edge e11 = new Edge(d12, d14); // 12 14
-            Edge e12 = new Edge(d13, d15); // 13 15
-            Edge e13 = new Edge(d12, d0); // 12 0
-            Edge e14 = new Edge(d12, d1); // 12 1
-            Edge e15 = new Edge(d14, d4); // 14 4
-            Edge e16 = new Edge(d14, d5); // 14 5
-            Edge e17 = new Edge(d13, d2); // 13 2
-            Edge e18 = new Edge(d13, d3); // 13 3
-            Edge e19 = new Edge(d15, d6); // 15 6
-            Edge e20 = new Edge(d15, d7); // 15 7
+            Edge e11 = new Edge(d14, d12); // 12 14
+            Edge e12 = new Edge(d15, d13); // 13 15
+            Edge e13 = new Edge(d0, d12); // 12 0
+            Edge e14 = new Edge(d1, d12); // 12 1
+            Edge e15 = new Edge(d4, d14); // 14 4
+            Edge e16 = new Edge(d5, d14); // 14 5
+            Edge e17 = new Edge(d2, d13); // 13 2
+            Edge e18 = new Edge(d3, d13); // 13 3
+            Edge e19 = new Edge(d6, d15); // 15 6
+            Edge e20 = new Edge(d7, d15); // 15 7
             /*
             {16,17},
             {18,19},
@@ -190,30 +191,30 @@ namespace cg_lab89.Figures
             {19,5},
             {19,7}
              */
-            Edge e21 = new Edge(d16, d17); // 16 17
-            Edge e22 = new Edge(d18, d19); // 18 19
-            Edge e23 = new Edge(d16, d0); // 16 0
-            Edge e24 = new Edge(d16, d2); // 16 2
-            Edge e25 = new Edge(d17, d1); // 17 1
-            Edge e26 = new Edge(d17, d3); // 17 3
-            Edge e27 = new Edge(d18, d4); // 18 4
-            Edge e28 = new Edge(d18, d6); // 18 6
-            Edge e29 = new Edge(d19, d5); // 19 5
-            Edge e30 = new Edge(d19, d7); // 19 7
-            Polygon p1 = new Polygon(new List<Edge> { e13, e14, e25, e21, e23 });
-            Polygon p2 = new Polygon(new List<Edge> { e2,  e1,  e4,  e24, e23 });
-            Polygon p3 = new Polygon(new List<Edge> { e2,  e3,  e15, e11, e13 });
-            Polygon p4 = new Polygon(new List<Edge> { e18, e17, e24, e21, e26 });
-            Polygon p5 = new Polygon(new List<Edge> { e17, e12, e19, e5, e4});
-            Polygon p6 = new Polygon(new List<Edge> { e1, e5, e28, e27, e3 });
-            Polygon p7 = new Polygon(new List<Edge> { e29, e22, e27, e15, e16 });
-            Polygon p8 = new Polygon(new List<Edge> { e8, e7, e14, e11, e16});
-            Polygon p9 = new Polygon(new List<Edge> { e6, e9, e26, e21, e7});
-            Polygon p10 = new Polygon(new List<Edge> { e9, e10, e20, e12, e18});
-            Polygon p11 = new Polygon(new List<Edge> { e22, e28, e19, e20, e30});
-            Polygon p12 = new Polygon(new List<Edge> { e5, e4, e17, e12, e19});
-
-            return new List<Polygon> { p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12 };
+            Edge e21 = new Edge(d17, d16); // 16 17
+            Edge e22 = new Edge(d19, d18); // 18 19
+            Edge e23 = new Edge(d0, d16); // 16 0
+            Edge e24 = new Edge(d2, d16); // 16 2
+            Edge e25 = new Edge(d1, d17); // 17 1
+            Edge e26 = new Edge(d3, d17); // 17 3
+            Edge e27 = new Edge(d4, d18); // 18 4
+            Edge e28 = new Edge(d6, d18); // 18 6
+            Edge e29 = new Edge(d5, d19); // 19 5
+            Edge e30 = new Edge(d7, d19); // 19 7
+            Polygon p1 = new Polygon(new List<Edge> { e23, e14, e25, e21, e13 });
+            Polygon p2 = new Polygon(new List<Edge> { e23,  e1,  e4,  e24, e2 });
+            Polygon p3 = new Polygon(new List<Edge> { e13,  e3,  e15, e11, e2 });
+            Polygon p4 = new Polygon(new List<Edge> { e26, e17, e24, e21, e18 });
+            Polygon p5 = new Polygon(new List<Edge> { e4, e12, e19, e5, e17});
+            Polygon p6 = new Polygon(new List<Edge> { e3, e5, e28, e27, e1 });
+            Polygon p7 = new Polygon(new List<Edge> { e16, e22, e27, e15, e29 });
+            Polygon p8 = new Polygon(new List<Edge> { e16, e7, e14, e11, e8 });
+            Polygon p9 = new Polygon(new List<Edge> { e7, e9, e26, e21, e6 });
+            Polygon p10 = new Polygon(new List<Edge> { e18, e10, e20, e12, e9});
+            Polygon p11 = new Polygon(new List<Edge> { e30, e28, e19, e20, e22 });
+            Polygon p12 = new Polygon(new List<Edge> { e19, e4, e17, e12, e5 });
+            List<Polygon> p = new List<Polygon> { p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12 };
+            return p;
 
         }
     }

@@ -1,5 +1,7 @@
 ﻿using cg_lab89.MathUtils;
 using cg_lab89.Primitives;
+using System.Diagnostics;
+using System.Net.NetworkInformation;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
@@ -111,11 +113,12 @@ namespace cg_lab89.Render
 
                     PointF? p1 = camera.getProjection(edge.start);
                     PointF? p2 = camera.getProjection(edge.end);
+
                     if (p1.HasValue && p2.HasValue)
                     {
-                        DrawLine(p1.Value, p2.Value, color, ref fb);
-                    }
+                        DrawLine(p1.Value, p2.Value, color, ref fb); 
 
+                    }
                 }
 
             }
@@ -135,6 +138,7 @@ namespace cg_lab89.Render
                         DrawLine(p1.Value, p2.Value, color, ref fb);
                     }
 
+                    
                 }
             }
         }
@@ -157,7 +161,12 @@ namespace cg_lab89.Render
 
         public static void DrawSceneZbuffer(int w, int h, ref List<Polyhedron> polyhedrons, ref Camera camera, ref FastBitmap fb)
         {
-            Z_buffer.z_buf(w,h, polyhedrons, ref camera, ref fb);
+            //Z_buffer.z_buf(w,h, polyhedrons, ref camera, ref fb);
+            Texturing.z_buf(w, h, polyhedrons, ref camera, ref fb,new Light(new Dot(50, 50, 50)), true); 
+            PointF? p1 = camera.getProjection(new Dot(250,250,250));
+            if (p1.HasValue) fb.SetPixel(new Point((int)p1.Value.X, (int)p1.Value.Y), Color.Blue);
         }
+
+
     }
 }

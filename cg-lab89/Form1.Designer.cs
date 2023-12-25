@@ -75,6 +75,8 @@
             contextMenuCreateTetrahedron = new ToolStripMenuItem();
             contextMenuCreateHexahedron = new ToolStripMenuItem();
             contextMenuCreateDodecahedron = new ToolStripMenuItem();
+            икосаэдрToolStripMenuItem = new ToolStripMenuItem();
+            октаэдрToolStripMenuItem = new ToolStripMenuItem();
             pictureBox1 = new PictureBox();
             toolStrip1 = new ToolStrip();
             toolStripComboBox1 = new ToolStripComboBox();
@@ -86,6 +88,7 @@
             label7 = new Label();
             label8 = new Label();
             buttonRotate = new Button();
+            графикToolStripMenuItem = new ToolStripMenuItem();
             groupSettings.SuspendLayout();
             panel2.SuspendLayout();
             panelObject.SuspendLayout();
@@ -519,14 +522,14 @@
             // 
             contextMenuCreate.Items.AddRange(new ToolStripItem[] { объектToolStripMenuItem });
             contextMenuCreate.Name = "contextMenuCreate";
-            contextMenuCreate.Size = new Size(118, 26);
+            contextMenuCreate.Size = new Size(181, 48);
             contextMenuCreate.Opening += contextMenuCreate_Opening;
             // 
             // объектToolStripMenuItem
             // 
-            объектToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { contextMenuCreateTetrahedron, contextMenuCreateHexahedron, contextMenuCreateDodecahedron });
+            объектToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { contextMenuCreateTetrahedron, contextMenuCreateHexahedron, contextMenuCreateDodecahedron, икосаэдрToolStripMenuItem, октаэдрToolStripMenuItem, графикToolStripMenuItem });
             объектToolStripMenuItem.Name = "объектToolStripMenuItem";
-            объектToolStripMenuItem.Size = new Size(117, 22);
+            объектToolStripMenuItem.Size = new Size(180, 22);
             объектToolStripMenuItem.Text = "Создать";
             // 
             // contextMenuCreateTetrahedron
@@ -549,6 +552,20 @@
             contextMenuCreateDodecahedron.Size = new Size(180, 22);
             contextMenuCreateDodecahedron.Text = "Додекаэдр";
             contextMenuCreateDodecahedron.Click += contextMenuCreateFigure;
+            // 
+            // икосаэдрToolStripMenuItem
+            // 
+            икосаэдрToolStripMenuItem.Name = "икосаэдрToolStripMenuItem";
+            икосаэдрToolStripMenuItem.Size = new Size(180, 22);
+            икосаэдрToolStripMenuItem.Text = "Икосаэдр";
+            икосаэдрToolStripMenuItem.Click += contextMenuCreateFigure;
+            // 
+            // октаэдрToolStripMenuItem
+            // 
+            октаэдрToolStripMenuItem.Name = "октаэдрToolStripMenuItem";
+            октаэдрToolStripMenuItem.Size = new Size(180, 22);
+            октаэдрToolStripMenuItem.Text = "Октаэдр";
+            октаэдрToolStripMenuItem.Click += contextMenuCreateFigure;
             // 
             // pictureBox1
             // 
@@ -647,6 +664,13 @@
             buttonRotate.Text = "Повернуть";
             buttonRotate.UseVisualStyleBackColor = false;
             // 
+            // графикToolStripMenuItem
+            // 
+            графикToolStripMenuItem.Name = "графикToolStripMenuItem";
+            графикToolStripMenuItem.Size = new Size(180, 22);
+            графикToolStripMenuItem.Text = "График";
+            графикToolStripMenuItem.Click += contextMenuCreateFigure;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -743,5 +767,8 @@
         private RadioButton radioRenderDefault;
         private Label label4;
         private ToolStripMenuItem contextMenuCreateDodecahedron;
+        private ToolStripMenuItem икосаэдрToolStripMenuItem;
+        private ToolStripMenuItem октаэдрToolStripMenuItem;
+        private ToolStripMenuItem графикToolStripMenuItem;
     }
 }

@@ -12,38 +12,47 @@ namespace cg_lab89.Figures
         public Polyhedron shape;
         public Octahedron() 
         {
-            Dot a = new Dot(50, 100, 50, FigureType.Octahedron);
-            Dot b = new Dot(0, 0, 0, FigureType.Octahedron);
-            Dot e = new Dot(100, 0, 0, FigureType.Octahedron);
-            Dot d = new Dot(100, 0, 100, FigureType.Octahedron);
-            Dot c = new Dot(0, 0, 100, FigureType.Octahedron);
-            Dot f = new Dot(50, -100, 50, FigureType.Octahedron);
+            Dot a = new Dot(100, 0, 100, FigureType.Octahedron);
+            Dot b = new Dot(100, 100, 200, FigureType.Octahedron);
+            Dot c = new Dot(200, 100, 100, FigureType.Octahedron);
+            Dot d = new Dot(100, 200, 100, FigureType.Octahedron);
+            Dot e = new Dot(0, 100, 100, FigureType.Octahedron);
+            Dot f = new Dot(100, 100, 0, FigureType.Octahedron);
             Edge ab = new Edge(a, b);
-            Edge ae = new Edge(a, e);
-            Edge ad = new Edge(a, d);
-            Edge ac = new Edge(a, c);
-
             Edge bc = new Edge(b, c);
-            Edge cd = new Edge(c, d);
-            Edge de = new Edge(d, e);
+            Edge ca = new Edge(c, a);
+            Edge cb = new Edge(c, b);
+            Edge bd = new Edge(b, d);
+            Edge dc = new Edge(d, c);
+            Edge db = new Edge(d, b);
+            Edge be = new Edge(b, e);
+            Edge ed = new Edge(e, d);
             Edge eb = new Edge(e, b);
+            Edge ba = new Edge(b, a);
+            Edge ae = new Edge(a, e);
+            Edge ac = new Edge(a, c);
+            Edge cf = new Edge(c, f);
+            Edge fa = new Edge(f, a);
+            Edge cd = new Edge(c, d);
+            Edge df = new Edge(d, f);
+            Edge fc = new Edge(f, c);
+            Edge de = new Edge(d, e);
+            Edge ef = new Edge(e, f);
+            Edge fd = new Edge(f, d);
+            Edge ea = new Edge(e, a);
+            Edge af = new Edge(a, f);
+            Edge fe = new Edge(f, e);
 
-            Edge bf = new Edge(f, b);
-            Edge ef = new Edge(f, e);
-            Edge df = new Edge(f, d);
-            Edge cf = new Edge(f, c);
+            Polygon abc = new Polygon(new List<Edge> { ab, bc, ca });
+            Polygon cbd = new Polygon(new List<Edge> { cb, bd, dc });
+            Polygon dbe = new Polygon(new List<Edge> { db, be, ed });
+            Polygon eba = new Polygon(new List<Edge> { eb, ba, ae });
+            Polygon acf = new Polygon(new List<Edge> { ac, cf, fa });
+            Polygon cdf = new Polygon(new List<Edge> { cd, df, fc });
+            Polygon def = new Polygon(new List<Edge> { de, ef, fd });
+            Polygon eaf = new Polygon(new List<Edge> { ea, af, fe });
 
-            Polygon abc = new Polygon(new List<Edge> { ab, bc, ac });
-            Polygon acd = new Polygon(new List<Edge> { ac, cd, ad });
-            Polygon aed = new Polygon(new List<Edge> { ae, de, ad });
-            Polygon abe = new Polygon(new List<Edge> { ab, eb, ae });
-
-
-            Polygon bfc = new Polygon(new List<Edge> { bc, cf, bf });
-            Polygon cfd = new Polygon(new List<Edge> { cf, df, cd });
-            Polygon efd = new Polygon(new List<Edge> { df, ef, de });
-            Polygon bfe = new Polygon(new List<Edge> { ef, bf, eb });
-            shape = new Polyhedron(new List<Polygon> {abc, acd, aed, abe, bfc, cfd, efd, bfe});
+            shape = new Polyhedron(new List<Polygon> {abc, cbd, dbe, eba, acf, cdf, def, eaf });
             shape.dots = new List<Dot> { a, b, c, d, e, f };
         }
         public static List<Polygon> getPolys(List<Dot> dots) 
@@ -54,32 +63,41 @@ namespace cg_lab89.Figures
             Dot d = dots[3];
             Dot c = dots[4];
             Dot f = dots[5];
+
             Edge ab = new Edge(a, b);
-            Edge ae = new Edge(a, e);
-            Edge ad = new Edge(a, d);
-            Edge ac = new Edge(a, c);
-
             Edge bc = new Edge(b, c);
-            Edge cd = new Edge(c, d);
-            Edge de = new Edge(d, e);
+            Edge ca = new Edge(c, a);
+            Edge cb = new Edge(c, b);
+            Edge bd = new Edge(b, d);
+            Edge dc = new Edge(d, c);
+            Edge db = new Edge(d, b);
+            Edge be = new Edge(b, e);
+            Edge ed = new Edge(e, d);
             Edge eb = new Edge(e, b);
+            Edge ba = new Edge(b, a);
+            Edge ae = new Edge(a, e);
+            Edge ac = new Edge(a, c);
+            Edge cf = new Edge(c, f);
+            Edge fa = new Edge(f, a);
+            Edge cd = new Edge(c, d);
+            Edge df = new Edge(d, f);
+            Edge fc = new Edge(f, c);
+            Edge de = new Edge(d, e);
+            Edge ef = new Edge(e, f);
+            Edge fd = new Edge(f, d);
+            Edge ea = new Edge(e, a);
+            Edge af = new Edge(a, f);
+            Edge fe = new Edge(f, e);
 
-            Edge bf = new Edge(f, b);
-            Edge ef = new Edge(f, e);
-            Edge df = new Edge(f, d);
-            Edge cf = new Edge(f, c);
-
-            Polygon abc = new Polygon(new List<Edge> { ab, bc, ac });
-            Polygon acd = new Polygon(new List<Edge> { ac, cd, ad });
-            Polygon aed = new Polygon(new List<Edge> { ae, de, ad });
-            Polygon abe = new Polygon(new List<Edge> { ab, eb, ae });
-
-
-            Polygon bfc = new Polygon(new List<Edge> { bc, cf, bf });
-            Polygon cfd = new Polygon(new List<Edge> { cf, df, cd });
-            Polygon efd = new Polygon(new List<Edge> { df, ef, de });
-            Polygon bfe = new Polygon(new List<Edge> { ef, bf, eb });
-            return new List<Polygon> { abc, acd, aed, abe, bfc, cfd, efd, bfe };
+            Polygon abc = new Polygon(new List<Edge> { ab, bc, ca });
+            Polygon cbd = new Polygon(new List<Edge> { cb, bd, dc });
+            Polygon dbe = new Polygon(new List<Edge> { db, be, ed });
+            Polygon eba = new Polygon(new List<Edge> { eb, ba, ae });
+            Polygon acf = new Polygon(new List<Edge> { ac, cf, fa });
+            Polygon cdf = new Polygon(new List<Edge> { cd, df, fc });
+            Polygon def = new Polygon(new List<Edge> { de, ef, fd });
+            Polygon eaf = new Polygon(new List<Edge> { ea, af, fe });
+            return new List<Polygon> { abc, cbd, dbe, eba, acf, cdf, def, eaf };
         }
     }
 }

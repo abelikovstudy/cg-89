@@ -19,17 +19,23 @@ namespace cg_lab89.Primitives
         public float x { get; set; }
         public float y { get; set; }
         public float z { get; set; }
-        public Dot(float _x, float _y, float _z, FigureType ft = FigureType.Tetrahedron)
+        public Texel tex;
+        public float lightness;
+        public VectorUtils norm;
+        public Dot(float _x, float _y, float _z, FigureType ft = FigureType.Tetrahedron, float _lightness = 0.5f)
         {
             x = _x;
             y = _y;
             z = _z;
             type = ft;
+            lightness = _lightness; 
         }
         public override string ToString()
         {
-            return string.Concat($"{x} {y} {z}");
+            
+            return string.Concat($"{(int)x} {(int)y} {(int)z}");
         }
+
         public PointF getProjection(ProjectionType projection) 
         {
 

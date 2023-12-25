@@ -64,9 +64,9 @@ namespace cg_lab89
                 Drawing.DrawScenePruned(ref camera, ref polyhedrons, ref fb);
                 if (polyhedrons.Count != 0) Drawing.DrawFigurePruned(ref camera, selected, Color.Red, ref fb);
             }
-            else if(radioRenderZbuffer.Checked)
+            else if (radioRenderZbuffer.Checked)
             {
-                Drawing.DrawSceneZbuffer(pictureBox1.Width + 500, pictureBox1.Height + 500, ref polyhedrons, ref camera, ref fb);
+                Drawing.DrawSceneZbuffer(pictureBox1.Width, pictureBox1.Height, ref polyhedrons, ref camera, ref fb);
             }
             pictureBox1.Image = pictureBitmap;
             fb.Dispose();
@@ -136,6 +136,28 @@ namespace cg_lab89
                     polyhedrons.Last().dots = AffineTransformations.shift(d.shape.dots, camera.position.x, camera.position.y, 0);
                     foreach (Dot dot in polyhedrons.Last().dots) dot.type = FigureType.Dodecahedron;
                     polyhedrons.Last().type = FigureType.Dodecahedron;
+                    break;
+                case "Икосаэдр":
+                    Icosahedron i = new Icosahedron();
+                    polyhedrons.Add(i.shape);
+                    polyhedrons.Last().dots = AffineTransformations.shift(i.shape.dots, camera.position.x, camera.position.y, 0);
+                    foreach (Dot dot in polyhedrons.Last().dots) dot.type = FigureType.Icosahedron;
+                    polyhedrons.Last().type = FigureType.Icosahedron;
+                    break;
+                case "Октаэдр":
+                    Octahedron o = new Octahedron();
+                    polyhedrons.Add(o.shape);
+                    polyhedrons.Last().dots = AffineTransformations.shift(o.shape.dots, camera.position.x, camera.position.y, 0);
+                    foreach (Dot dot in polyhedrons.Last().dots) dot.type = FigureType.Octahedron;
+                    polyhedrons.Last().type = FigureType.Octahedron;
+                    break;
+                case "График":
+                    PlotFunction pf = new PlotFunction("1");
+                    Plot p = new Plot(-200,200,-200,200,10,pf);
+                    polyhedrons.Add(p.shape);
+                    polyhedrons.Last().dots = AffineTransformations.shift(p.shape.dots, camera.position.x, camera.position.y, 0);
+                    foreach (Dot dot in polyhedrons.Last().dots) dot.type = FigureType.Plot;
+                    polyhedrons.Last().type = FigureType.Plot;
                     break;
             }
 
